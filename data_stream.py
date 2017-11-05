@@ -2,17 +2,17 @@ import random
 import math
 import numpy as np
 
-max_ = 100000000000 # número máximo que pode ser gerado
+max_ = 100000000000 # numero maximo que pode ser gerado
 
 
 def generate_numbers():# fresolve a questao 1
 
-    numbers=[] # lista que é usada para gerar N^8 números (o máximo que cabe na memoria)
+    numbers=[] # lista que e usada para gerar N8 numeros (o maximo que cabe na memoria)
     map_count ={} # armazena os numeros distintos
     np.random.seed(50)# semente para sempre gerar a msm sequencia de numeros
 	
-    for i in range(100):# executa 100 vezes para poder a partir das listas de N^8 formar um dicionario com N^10
-        numbers = np.random.uniform(0,1,100000000)
+    for i in range(100):# executa 100 vezes para poder a partir das listas de N8 formar um dicionario com N10
+        numbers = np.random.uniform(0,1,1000000)
         numbers = np.square(numbers)
         numbers = np.floor(1/numbers)
         numbers[numbers>max] = max_
@@ -20,7 +20,37 @@ def generate_numbers():# fresolve a questao 1
         for n in np.unique(numbers):
             if n not in  map_count:
                 map_count[n] = 1
+           
     return map_count
+
+
+def surpriser_number():# resolve a questao 3
+
+    numbers=[] # lista que e usada para gerar N8 numeros (o maximo que cabe na memoria)
+    map_count ={} # armazena as reptições de cada número do conjunto
+    np.random.seed(50)# semente para sempre gerar a msm sequencia de numeros
+    
+    for i in range(100):# executa 100 vezes para poder a partir das listas de N8 formar um dicionario com N10
+        numbers = np.random.uniform(0,1,10000)
+        numbers = np.square(numbers)
+        numbers = np.floor(1/numbers)
+        numbers[numbers>max] = max_
+
+        for n in numbers:
+            if n not in  map_count:
+                map_count[n] = 1
+            else:
+                map_count[n]+=1
+    
+
+    
+    sn = 0 # armazena o suprise number
+    for i in map_count:
+        sn += (map_count[i]* pow(i,2))  
+    
+   return sn
+
+
 def count_zeros(n):
 
     count_z = 0
@@ -33,38 +63,37 @@ def count_zeros(n):
         index = index - 1
     return count_z
 
+
 def randomHash(prime=2654435761):# funcao de hash usada na questao 2
 	a,b = random.randint(0,prime), random.randint(0,prime)
 	def f(x):
 		return int ( ((a*x + b) % prime) )
 	return f
 
-def numbers_distincts(num): # resolve a questao 2, num representa a quantidade de funções de hash a serem aplicadas
-    map_count = generate_numbers()
-    print 'Quantidade de números distintos real:', map_count.__len__()
 
-    r = [] # armazena os maiores valores da quantidade de zeros obtido a partir do dicionario original aplicado as funções de hash
-    max_value = 0 # armazena o valor do número que obtem a maior quantidade de zeros antes do digito um dos valores gerados por cada hash (em binário)
+def numbers_distincts(num): # resolve a questao 2, num representa a quantidade de funcoes de hash a serem aplicadas
+    map_count = generate_numbers()
+    print 'Quantidade de numeros distintos real:', map_count.__len__()
+
+    r = [] # armazena os maiores valores da quantidade de zeros obtido a partir do dicionario original aplicado as funcoes de hash
+    max_value = 0 # armazena o valor do numero que obtem a maior quantidade de zeros antes do digito um dos valores gerados por cada hash (em binario)
     zeros = 0
     for i in xrange(num):
         r.append(0)
-    hashes = [randomHash() for _ in range(num)]# gera funções de hash solicitadas e armazena numa lista 
+    hashes = [randomHash() for _ in range(num)]# gera funcoes de hash solicitadas e armazena numa lista 
     for key, value in  map_count.items():
        i = 0
        max_value = 0
        for hash in hashes:
-           value_h = hash(key)# aplica os hashs a cada valor do dicionario original para prever os números distintos
+           value_h = hash(key)# aplica os hashs a cada valor do dicionario original para prever os numeros distintos
            value_b = bin(value_h) # transforma os  valores  gerados pelo hash em binario
-           zeros = count_zeros(value_b)# conta os zeros até o primeiro digito 1
+           zeros = count_zeros(value_b)# conta os zeros ate o primeiro digito 1
            max_value = zeros
            if (max_value) > r[i] :
                r[i] = max_value
            i+=1
-
-
-
-    median_average(20,r) # calcula a media das medinas dos valores contidos em r, dividas em grupos, para poder prever a quantidade de numeros distintos
-
+    print ' size r:',len(r)
+    return r
 
 
 def median(list):
@@ -72,18 +101,17 @@ def median(list):
     list.sort()
     if len(list) % 2 == 0:
         n = len(list)
-        mediana = (list[n / 2 - 1] + list[n / 2]) / 2
+        median = (list[n / 2 - 1] + list[n / 2]) / 2
     else:
-        mediana = list[len(list) / 2]
+        median = list[len(list) / 2]
 
-    return mediana
+    return median
 
-def median_average(div, list):
+
+def median_average(div, list, size_groups): # size_groups deve ser um multiplo de log2 N, aproximadamente 33
     median_r = []
     start = 0
-
     k=1
-
     average = []
 
     if len(list)%div == 0:
@@ -92,7 +120,7 @@ def median_average(div, list):
             count = 0
             for j in range(start, end):
                 count = count +list[j];
-            average .append(count/33)
+            average .append(count/size_groups)
             start = end+1
             k = k+1
             end = ((len(list) / div) * k) - 1
@@ -101,5 +129,6 @@ def median_average(div, list):
     print 'mediana das medias: ',pow(2,median(average))
 
 
-if __name__ == "__main__":
-   numbers_distincts(660)
+if __name__ == "__main__":   
+   #median_average(20,numbers_distincts(1320), 66) # calcula a media das medinas dos valores contidos em r, dividas em grupos, para poder prever a quantidade de numeros distintos
+   surpriser_number()
