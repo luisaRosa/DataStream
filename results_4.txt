@@ -1,0 +1,62 @@
+Para N=10^10
+
+AC: 17743762806290448384
+variables size: 10
+1774376280629044838 second moment --estimado com 10 variaveis
+AC: 6385477598871345152
+variables size: 20
+319273879943567257 second moment --estimado com 20 variaveis
+AC: 7935298531452241920
+variables size: 30
+264509951048408064 second moment --estimado com 30 variaveis
+AC: 6348657304033138688
+variables size: 40
+158716432600828467 second moment --estimado com 40 variaveis
+AC: 3179732938871345152
+variables size: 50
+63594658777426903 second moment --estimado com 50 variaveis
+AC: 14809303235485380608
+variables size: 100
+148093032354853806 second moment --estimado com 100 variaveis
+
+Para N=10^9
+
+AC: 1102474510000000000
+variables size: 10
+110247451000000000 second moment --estimado com 10 variaveis
+AC: 3784403660000000000
+variables size: 20
+189220183000000000 second moment --estimado com 20 variaveis
+AC: 4919666040000000000
+variables size: 30
+163988868000000000 second moment --estimado com 30 variaveis
+AC: 4701848636000000000
+variables size: 40
+117546215900000000 second moment --estimado com 40 variaveis
+AC: 8459191148000000000
+variables size: 50
+169183822960000000 second moment --estimado com 50 variaveis
+AC: 10273017502000000000
+variables size: 100
+102730175020000000 second moment --estimado com 100 variaveis
+
+Para N=10^8
+
+AC: 18284800200000000
+variables size: 10
+1828480020000000 second moment --estimado com 10 variaveis
+AC: 24083535000000000
+variables size: 20
+1204176750000000 second moment --estimado com 20 variaveis
+AC: 36627188400000000
+variables size: 30
+1220906280000000 second moment --estimado com 30 variaveis
+AC: 31186103600000000
+variables size: 40
+779652590000000 second moment --estimado com 40 variaveis
+AC: 42518067600000000
+variables size: 50
+850361352000000 second moment --estimado com 50 variaveis
+AC: 82629030600000000
+variables size: 100
+826290306000000 second moment --estimado com 100 variaveis
